@@ -1,7 +1,13 @@
 import React from "react";
+import Sidebar from "./Sidebar";
 
 const JournalScreen = () => {
-  return <h1>JournalScreen</h1>;
+  return (
+    <>
+      <Sidebar />
+      <h1>MainContent</h1>;
+    </>
+  );
 };
 
 export default JournalScreen;

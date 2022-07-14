@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { login } from "../../features/auth/authSlice";
+import { startGoogleLogin } from "../../features/auth/thunks";
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,10 @@ const LoginScreen = () => {
         displayName: "sdasdsdsdasd",
       })
     );
+  };
+
+  const handleGoogleLogin = () => {
+    dispatch(startGoogleLogin());
   };
 
   return (
@@ -50,7 +55,7 @@ const LoginScreen = () => {
         <hr />
         <div className="auth__social-networks">
           <p>Login with social networks</p>
-          <div className="google-btn">
+          <div className="google-btn" onClick={handleGoogleLogin}>
             <div className="google-icon-wrapper">
               <img
                 className="google-icon"

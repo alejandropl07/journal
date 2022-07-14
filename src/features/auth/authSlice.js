@@ -5,7 +5,6 @@ export const authSlice = createSlice({
   initialState: {},
   reducers: {
     login: (state, action) => {
-      console.log(action.payload)
       return {
         uid: action.payload.uid,
         name: action.payload.displayName,

@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import {
@@ -15,6 +15,8 @@ const LoginScreen = () => {
   });
 
   const { email, password } = formValues;
+
+  const { loading } = useSelector((state) => state.ui);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -45,7 +47,11 @@ const LoginScreen = () => {
           value={password}
           onChange={handleInputChange}
         />
-        <button type="submit" className="btn btn-primary btn-block">
+        <button
+          type="submit"
+          className="btn btn-primary btn-block"
+          disabled={loading}
+        >
           Login
         </button>
         <hr />

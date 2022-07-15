@@ -9,8 +9,15 @@ export const uiSlice = createSlice({
     removeError: (state) => {
       state.msgError = null;
     },
+    startLoading: (state) => {
+      state.loading = true;
+    },
+    finishLoading: (state) => {
+      state.loading = false;
+    },
   },
 });
 
-export const { setError, removeError } = uiSlice.actions;
+export const { setError, removeError, startLoading, finishLoading } =
+  uiSlice.actions;
 export default uiSlice.reducer;

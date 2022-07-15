@@ -9,12 +9,24 @@ export const startGoogleLogin = () => {
   };
 };
 
+export const startLoginEmailPassword = (email, password) => {
+  return (dispatch) => {
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then(({ user }) => {
+        dispatch(login(user));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+};
+
 export const startRegisterWithEmailPassword = (email, password, name) => {
   return (dispatch) => {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then(async ({ user }) => {
-        console.log(user);
         await user.updateProfile({ displayName: name });
         dispatch(login(user));
       })

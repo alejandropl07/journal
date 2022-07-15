@@ -2,8 +2,10 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
-import { login } from "../../features/auth/authSlice";
-import { startGoogleLogin } from "../../features/auth/thunks";
+import {
+  startGoogleLogin,
+  startLoginEmailPassword,
+} from "../../features/auth/thunks";
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
@@ -16,13 +18,7 @@ const LoginScreen = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log(email, password);
-    dispatch(
-      login({
-        uid: 2312,
-        displayName: "sdasdsdsdasd",
-      })
-    );
+    dispatch(startLoginEmailPassword(email, password));
   };
 
   const handleGoogleLogin = () => {

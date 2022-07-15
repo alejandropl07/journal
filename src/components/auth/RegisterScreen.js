@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "../../hooks/useForm";
 import validator from "validator";
 import { removeError, setError } from "../../features/ui/uiSlice";
@@ -41,6 +41,8 @@ const RegisterScreen = () => {
       console.log("Form ok");
     }
   };
+
+  const { msgError } = useSelector((state) => state.ui);
 
   return (
     <>
@@ -86,7 +88,7 @@ const RegisterScreen = () => {
           Already registered?
         </Link>
 
-        <div className="auth__alert-error mt-5">Error</div>
+        {msgError && <div className="auth__alert-error mt-5">{msgError}</div>}
       </form>
     </>
   );

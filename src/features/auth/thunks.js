@@ -1,6 +1,6 @@
 import { auth, googleAuthProvider } from "../../firebase/firebase-config";
 import { finishLoading, startLoading } from "../ui/uiSlice";
-import { login } from "./authSlice";
+import { login, logout } from "./authSlice";
 
 export const startGoogleLogin = () => {
   return (dispatch) => {
@@ -37,5 +37,12 @@ export const startRegisterWithEmailPassword = (email, password, name) => {
       .catch((error) => {
         console.log(error);
       });
+  };
+};
+
+export const startLogout = () => {
+  return async (dispatch) => {
+    await auth.signOut();
+    dispatch(logout());
   };
 };

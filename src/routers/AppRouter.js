@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginScreen from "../components/auth/LoginScreen";
@@ -10,14 +10,24 @@ import AuthRouter from "./AuthRouter";
 const AppRouter = () => {
   const dispatch = useDispatch();
 
+  const [checking, setChecking] = useState(true);
+  const [isLogged, setIsLogged] = useState(false);
+
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
-      console.log(user);
       if (user?.uid) {
         dispatch(login(user));
+        setIsLogged(true);
+      } else {
+        setIsLogged(false);
       }
+      setChecking(false);
     });
   }, [dispatch]);
+
+  if (checking) {
+    return <h1>Loading...</h1>;
+  }
 
   return (
     <BrowserRouter>

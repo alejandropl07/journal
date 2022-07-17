@@ -8,7 +8,9 @@ export const notesSlice = createSlice({
     setActiveNote: (state, action) => {
       state.active = action.payload;
     },
-    loadNotes: (state) => {},
+    notesLoaded: (state, action) => {
+      state.notes = action.payload;
+    },
     updateNote: (state) => {},
     updateImageUrl: (state) => {},
     deleteNote: (state) => {},
@@ -19,7 +21,7 @@ export const notesSlice = createSlice({
 export const {
   newNote,
   setActiveNote,
-  loadNotes,
+  notesLoaded,
   updateNote,
   updateImageUrl,
   deleteNote,

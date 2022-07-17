@@ -1,5 +1,6 @@
 import { db } from "../../firebase/firebase-config";
-import { setActiveNote } from "./notesSlice";
+import { loadNotes } from "../../helpers/loadNotes";
+import { notesLoaded, setActiveNote } from "./notesSlice";
 
 export const startNewNote = () => {
   return async (dispatch, getState) => {
@@ -21,5 +22,12 @@ export const startNewNote = () => {
         date: newNote.date,
       })
     );
+  };
+};
+
+export const startLoadNotes = (uid) => {
+  return async (dispatch) => {
+    const notes = await loadNotes(uid);
+    dispatch(notesLoaded(notes));
   };
 };

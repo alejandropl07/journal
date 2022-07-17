@@ -4,9 +4,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginScreen from "../components/auth/LoginScreen";
 import JournalScreen from "../components/journal/JournalScreen";
 import { login } from "../features/auth/authSlice";
-import { notesLoaded } from "../features/notes/notesSlice";
+import { startLoadNotes } from "../features/notes/thunks";
 import { auth } from "../firebase/firebase-config";
-import { loadNotes } from "../helpers/loadNotes";
 import AuthRouter from "./AuthRouter";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
@@ -22,8 +21,7 @@ const AppRouter = () => {
       if (user?.uid) {
         dispatch(login(user));
         setIsLogged(true);
-        const notes = await loadNotes(user.uid);
-        dispatch(notesLoaded(notes));
+        dispatch(startLoadNotes(user.uid));
       } else {
         setIsLogged(false);
       }

@@ -5,7 +5,9 @@ export const notesSlice = createSlice({
   initialState: { notes: [], active: null },
   reducers: {
     newNote: (state) => {},
-    setActiveNote: (state) => {},
+    setActiveNote: (state, action) => {
+      state.active = action.payload;
+    },
     loadNotes: (state) => {},
     updateNote: (state) => {},
     updateImageUrl: (state) => {},

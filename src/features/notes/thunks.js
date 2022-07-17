@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import { db } from "../../firebase/firebase-config";
 import { loadNotes } from "../../helpers/loadNotes";
+import { uploadPicture } from "../../helpers/uploadPicture";
 import { notesLoaded, setActiveNote, updateNote } from "./notesSlice";
 
 export const startNewNote = () => {
@@ -45,5 +46,14 @@ export const startUpdateNote = (note) => {
     await db.doc(`${uid}/journal/notes/${note.id}`).update(noteToFirestore);
     dispatch(updateNote({ id: note.id, ...noteToFirestore }));
     Swal.fire("Saved", noteToFirestore.title, "success");
+  };
+};
+
+export const startUploadingPicture = (file) => {
+  return async (dispatch, getState) => {
+    const { active } = getState().notes;
+
+    const fileUrl = await uploadPicture(file);
+    console.log(fileUrl);
   };
 };

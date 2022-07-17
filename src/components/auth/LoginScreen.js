@@ -10,8 +10,8 @@ import {
 const LoginScreen = () => {
   const dispatch = useDispatch();
   const [formValues, handleInputChange] = useForm({
-    email: "alejandro@gmail.com",
-    password: "1111",
+    email: "aprieto@gmail.com",
+    password: "1234567",
   });
 
   const { email, password } = formValues;

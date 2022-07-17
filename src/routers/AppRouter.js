@@ -6,6 +6,8 @@ import JournalScreen from "../components/journal/JournalScreen";
 import { login } from "../features/auth/authSlice";
 import { auth } from "../firebase/firebase-config";
 import AuthRouter from "./AuthRouter";
+import PrivateRoute from "./PrivateRoute";
+import PublicRoute from "./PublicRoute";
 
 const AppRouter = () => {
   const dispatch = useDispatch();
@@ -33,8 +35,25 @@ const AppRouter = () => {
     <BrowserRouter>
       <div>
         <Routes>
-          <Route path="/auth/*" element={<AuthRouter />} />
-          <Route exact path="/" element={<JournalScreen />} />
+          <Route
+            path="/auth/*"
+            element={
+              <PublicRoute isLogged={isLogged}>
+                <AuthRouter />
+              </PublicRoute>
+            }
+          />
+
+          <Route
+            exact
+            path="/"
+            element={
+              <PrivateRoute isLogged={isLogged}>
+                <JournalScreen />
+              </PrivateRoute>
+            }
+          />
+
           <Route path="/*" element={<LoginScreen />} />
         </Routes>
       </div>

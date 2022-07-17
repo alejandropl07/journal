@@ -3,8 +3,24 @@ import { createSlice } from "@reduxjs/toolkit";
 export const notesSlice = createSlice({
   name: "notes",
   initialState: { notes: [], active: null },
-  reducers: {},
+  reducers: {
+    newNote: (state) => {},
+    setActiveNote: (state) => {},
+    loadNotes: (state) => {},
+    updateNote: (state) => {},
+    updateImageUrl: (state) => {},
+    deleteNote: (state) => {},
+    logoutCleaning: (state) => {},
+  },
 });
 
-export const {} = notesSlice.actions;
+export const {
+  newNote,
+  setActiveNote,
+  loadNotes,
+  updateNote,
+  updateImageUrl,
+  deleteNote,
+  logoutCleaning,
+} = notesSlice.actions;
 export default notesSlice.reducer;

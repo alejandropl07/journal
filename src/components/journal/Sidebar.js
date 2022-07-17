@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../../features/auth/thunks";
+import { startNewNote } from "../../features/notes/thunks";
 import JournalEntries from "./JournalEntries";
 
 const Sidebar = () => {
@@ -9,6 +10,10 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     dispatch(startLogout());
+  };
+
+  const handleAddNew = () => {
+    dispatch(startNewNote());
   };
 
   return (
@@ -23,7 +28,7 @@ const Sidebar = () => {
         </button>
       </div>
 
-      <div className="journal__new-entry">
+      <div className="journal__new-entry" onClick={handleAddNew}>
         <i className="far fa-calendar-plus fa-5x"></i>
         <p className="mt-5">New entry</p>
       </div>

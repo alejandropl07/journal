@@ -11,7 +11,14 @@ export const notesSlice = createSlice({
     notesLoaded: (state, action) => {
       state.notes = action.payload;
     },
-    updateNote: (state) => {},
+    updateNote: (state, action) => {
+      return {
+        ...state,
+        notes: state.notes.map((note) =>
+          note.id === action.payload.id ? action.payload : note
+        ),
+      };
+    },
     updateImageUrl: (state) => {},
     deleteNote: (state) => {},
     logoutCleaning: (state) => {},

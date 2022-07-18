@@ -25,7 +25,6 @@ export const notesSlice = createSlice({
         ),
       };
     },
-    updateImageUrl: (state) => {},
     deleteNote: (state, action) => {
       return {
         ...state,
@@ -33,7 +32,13 @@ export const notesSlice = createSlice({
         notes: state.notes.filter((note) => note.id !== action.payload),
       };
     },
-    logoutCleaning: (state) => {},
+    logoutCleaning: (state) => {
+      return {
+        ...state,
+        active: null,
+        notes: [],
+      };
+    },
   },
 });
 
@@ -42,7 +47,6 @@ export const {
   setActiveNote,
   notesLoaded,
   updateNote,
-  updateImageUrl,
   deleteNote,
   logoutCleaning,
 } = notesSlice.actions;

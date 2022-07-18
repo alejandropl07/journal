@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 import { auth, googleAuthProvider } from "../../firebase/firebase-config";
+import { logoutCleaning } from "../notes/notesSlice";
 import { finishLoading, startLoading } from "../ui/uiSlice";
 import { login, logout } from "./authSlice";
 
@@ -45,5 +46,6 @@ export const startLogout = () => {
   return async (dispatch) => {
     await auth.signOut();
     dispatch(logout());
+    dispatch(logoutCleaning());
   };
 };

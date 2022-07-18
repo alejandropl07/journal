@@ -4,7 +4,13 @@ export const notesSlice = createSlice({
   name: "notes",
   initialState: { notes: [], active: null },
   reducers: {
-    newNote: (state) => {},
+    newNote: (state, action) => {
+      return {
+        ...state,
+        active: action.payload,
+        notes: [...state.notes, action.payload],
+      };
+    },
     setActiveNote: (state, action) => {
       state.active = action.payload;
     },
@@ -20,7 +26,13 @@ export const notesSlice = createSlice({
       };
     },
     updateImageUrl: (state) => {},
-    deleteNote: (state) => {},
+    deleteNote: (state, action) => {
+      return {
+        ...state,
+        active: null,
+        notes: state.notes.filter((note) => note.id !== action.payload),
+      };
+    },
     logoutCleaning: (state) => {},
   },
 });

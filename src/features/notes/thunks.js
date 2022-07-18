@@ -2,26 +2,30 @@ import Swal from "sweetalert2";
 import { db } from "../../firebase/firebase-config";
 import { loadNotes } from "../../helpers/loadNotes";
 import { uploadPicture } from "../../helpers/uploadPicture";
-import { notesLoaded, setActiveNote, updateNote } from "./notesSlice";
+import {
+  deleteNote,
+  notesLoaded,
+  updateNote,
+  newNote,
+} from "./notesSlice";
 
 export const startNewNote = () => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth;
 
-    const newNote = {
+    const newNoteFirestore = {
       title: "",
       body: "",
       date: new Date().getTime(),
     };
 
-    const doc = await db.collection(`${uid}/journal/notes`).add(newNote);
-    console.log(doc);
+    const doc = await db.collection(`${uid}/journal/notes`).add(newNoteFirestore);
     dispatch(
-      setActiveNote({
+      newNote({
         id: doc.id,
-        title: newNote.title,
-        body: newNote.body,
-        date: newNote.date,
+        title: newNoteFirestore.title,
+        body: newNoteFirestore.body,
+        date: newNoteFirestore.date,
       })
     );
   };
@@ -66,5 +70,15 @@ export const startUploadingPicture = (file) => {
     dispatch(startUpdateNote({ ...active, url }));
 
     Swal.close();
+  };
+};
+
+export const startDeleteNote = (id) => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
+
+    await db.doc(`${uid}/journal/notes/${id}`).delete();
+
+    dispatch(deleteNote(id));
   };
 };
